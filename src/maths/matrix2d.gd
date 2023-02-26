@@ -90,8 +90,8 @@ func multiply(other: Matrix2d) -> Matrix2d:
 func addition(other:Matrix2d) -> Matrix2d:
 	assert(cols == other.cols && rows == other.rows, "Matrices must be the same size to add");
 	var _data: Array[float] = Utils.generate_array_float(rows*cols,0.0);
-	for y in range(cols):
-		for x in range(rows):
+	for y in range(rows):
+		for x in range(cols):
 			_data[index(x,y)] = get_value(x,y) + other.get_value(x,y);
 	return Matrix2d.new(rows,cols,_data);
 
