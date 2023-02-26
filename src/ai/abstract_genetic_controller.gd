@@ -1,10 +1,9 @@
-class_name GeneticController;
+class_name AbstractGeneticController;
 extends Node2D;
 
 const agent_count: int = 100;
 const surviving_agents: int = 10;
-# Function that creates a new agent object
-var create_agent: Callable;
+
 
 var agent_map: Dictionary = {};
 var active_agents: Array[int] = [];
@@ -12,8 +11,10 @@ var active_agents: Array[int] = [];
 var generation: int = 0;
 var running: bool = false;
 
-func _init(_create_agent: Callable):
-	create_agent = _create_agent;
+
+func create_agent() -> AbstractAgentController:
+	Utils.implement();
+	return null;
 
 func _sort_ids(a:int, b:int):
 	return (agent_map[a] as AbstractAgentController).fitness > (agent_map[b] as AbstractAgentController).fitness;
@@ -21,7 +22,7 @@ func _sort_ids(a:int, b:int):
 func create_initial_generation(input_nodes: int, output_nodes: int, hidden_layers: Array[int]):
 	for i in range(agent_count):
 		var brain: NeuralNetwork = NeuralNetwork.new_random(input_nodes, output_nodes, hidden_layers);
-		var agent: AbstractAgentController = (create_agent.call() as AbstractAgentController);
+		var agent: AbstractAgentController = create_agent();
 		agent.network = brain;
 		agent_map[agent.get_instance_id()] = agent;
 		active_agents.append(agent.get_instance_id());
@@ -56,7 +57,7 @@ func create_next_generation():
 	generation += 1;
 	
 	for brain in new_brains:
-		var agent: AbstractAgentController = (create_agent.call() as AbstractAgentController);
+		var agent: AbstractAgentController = create_agent();
 		agent.network = brain;
 		agent_map[agent.get_instance_id()] = agent;
 		active_agents.append(agent.get_instance_id());

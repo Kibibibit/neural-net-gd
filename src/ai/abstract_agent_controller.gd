@@ -7,12 +7,15 @@ var fitness: float = 0.0;
 
 
 func fitness_function() -> float:
+	Utils.implement();
 	return 0.0
 
 func get_inputs() -> Array[float]:
+	Utils.implement();
 	return [];
 
 func process_outputs(_outputs: Array[float]) -> void:
+	Utils.implement();
 	pass;
 
 func pre_process(_delta: float) -> void:

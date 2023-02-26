@@ -19,3 +19,7 @@ func clone_array_matrix2d(arr:Array[Matrix2d]) -> Array[Matrix2d]:
 	for x in arr:
 		out.append(x.copy());
 	return out;
+
+func implement() -> void:
+	@warning_ignore("assert_always_false")
+	assert(false, "This function has not been implemented!");
